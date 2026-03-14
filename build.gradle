@@ -1,0 +1,148 @@
+plugins {
+	id 'java-library'
+    id 'jacoco'
+    id "org.sonarqube" version "6.2.0.5505"
+    id 'signing'
+	id 'maven-publish'
+}
+
+
+group = 'io.github.qishr'
+
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+
+dependencies {
+	testImplementation(platform('org.junit:junit-bom:5.13.3'))
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.13.4'
+    testImplementation 'org.mockito:mockito-core:5.18.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.18.0'
+	testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+
+    implementation "io.github.qishr:cascara-common:0.1.0"
+}
+
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+
+tasks.register('runtimeModulePath', Copy) {
+    dependsOn tasks.named('jar')
+    from configurations.runtimeClasspath
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    def modulePathDir = new File(rootProject.buildDir, 'modulepath')
+    modulePathDir.mkdirs()
+    into modulePathDir
+
+    doLast {
+        println "Finished copying files to modulepath."
+    }
+}
+
+
+tasks.named('build') {
+    finalizedBy(tasks.named('runtimeModulePath'))
+}
+
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+    finalizedBy jacocoTestReport
+}
+
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+
+sonar {
+  properties {
+    property "sonar.projectKey", "qishr_cascara"
+    property "sonar.organization", "qishr"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
+
+
+jar {
+    archiveBaseName.set(maven_name)
+    manifest {
+        attributes( 'Implementation-Title': maven_name,
+                    'Implementation-Version': version,
+                    'Implementation-Vendor': group,
+                    'Automatic-Module-Name': java_name,
+                    'Build-Date': new Date())
+    }
+}
+
+
+jar.doLast {
+    def jarFile = archiveFile.get().asFile
+    ant.checksum file: jarFile
+}
+
+
+signing {
+    sign publishing.publications
+}
+
+
+publishing {
+    publications {
+        pub(MavenPublication) {
+            from components.java
+            pom {
+                name = maven_name
+                description = title
+                url = "https://qishr.github.io/${maven_name}"
+                licenses {
+                    license {
+                        name = "Apache License, Version 2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0"
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'qishr'
+                        name = 'Sandy Dunlop'
+                        email = 'sandy.dunlop@gmail.com'
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://github.com/qishr/${maven_name}.git"
+                    developerConnection = "scm:git:ssh://github.com:qishr/${maven_name}.git"
+                    url = "https://github.com/qishr/${maven_name}"
+                }
+            }
+        }
+    }
+
+	repositories {
+        maven {
+            name = "LocalMavenWithChecksums"
+            url = uri(layout.buildDirectory.dir("staging-deploy"))
+        }
+    }
+}
