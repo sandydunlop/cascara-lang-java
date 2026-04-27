@@ -38,7 +38,16 @@ public class ModelUtil {
         // Hide whatever subtype `type` might be...
         VariableTypeNode variableType = new VariableTypeNode();
         variableType.fullTypeName = fullTypeName;
-        variableType.rawTypeName = type.rawTypeName;
+        if (type.rawTypeName == null || type.rawTypeName.isBlank()) {
+            int b = fullTypeName.indexOf("<");
+            if (b > -1) {
+                variableType.rawTypeName = fullTypeName.substring(0, b);
+            } else {
+                variableType.rawTypeName = fullTypeName;
+            }
+        } else {
+            variableType.rawTypeName = type.rawTypeName;
+        }
         variableType.typeParameterDeclaration = typeParam;
         variableType.link = type.link;
         variableType.fullTypeName = fullTypeName;
