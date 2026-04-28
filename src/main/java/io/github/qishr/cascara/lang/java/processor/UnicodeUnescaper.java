@@ -2,7 +2,7 @@ package io.github.qishr.cascara.lang.java.processor;
 
 
 /// JLS 3.3 compliant Unicode un-escaper
-/// @see https://docs.oracle.com/javase/specs/jls/se17/html/jls-3.html
+/// https://docs.oracle.com/javase/specs/jls/se17/html/jls-3.html
 public class UnicodeUnescaper {
 
     /**

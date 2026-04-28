@@ -37,12 +37,6 @@ public class SemanticModel extends JavaSemanticNode {
         this.title = title;
     }
 
-    /// Returns the name of the API.
-    /// @return The name of the API
-    // public String getName() {
-    //     return name;
-    // }
-
     public void addDependency(Dependency dependency) {
         dependencies.add(dependency);
     }

@@ -12,4 +12,9 @@ module cascara.lang.java {
     exports io.github.qishr.cascara.lang.java.processor;
     exports io.github.qishr.cascara.lang.java.token;
     exports io.github.qishr.cascara.lang.java.util;
+
+    opens io.github.qishr.cascara.lang.java.model;
+    opens io.github.qishr.cascara.lang.java.modeler;
+    opens io.github.qishr.cascara.lang.java.processor;
+    opens io.github.qishr.cascara.lang.java.util;
 }

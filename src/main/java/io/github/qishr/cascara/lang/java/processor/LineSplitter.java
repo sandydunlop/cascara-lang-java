@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * Utility class for splitting strings based on JLS 3.4 Line Terminators.
- * @see https://docs.oracle.com/javase/specs/jls/se17/html/jls-3.html#jls-3.4
+ * see https://docs.oracle.com/javase/specs/jls/se17/html/jls-3.html#jls-3.4
  */
 public class LineSplitter {
 
