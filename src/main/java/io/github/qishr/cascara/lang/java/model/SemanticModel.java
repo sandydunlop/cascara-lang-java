@@ -225,32 +225,6 @@ public class SemanticModel extends JavaSemanticNode {
         }
     }
 
-    /// Computes the longest common base package prefix shared by all packages in this API.
-    ///
-    /// This method iterates through the list of packages and determines the common package name prefix,
-    /// truncated at the nearest dot ('.') boundary. If no common base exists, returns an empty string.
-    ///
-    /// @return The longest common base package name shared by all packages, or an empty string if none.
-    public String commonBase() {
-        if (packages.isEmpty()) return "";
-        int lastDot = 0;
-        String base = packages.getFirst().getName().fullyQualifiedName();
-        for (PackageNode pkg : packages) {
-            String pkgName = pkg.getName().fullyQualifiedName();
-            for (int j=0; j<Math.min(base.length(), pkgName.length()); j++) {
-                if (base.charAt(j) != pkgName.charAt(j)) {
-                    base = base.substring(0, lastDot);
-                    break;
-                }
-                if (j == pkgName.length() - 1) {
-                    base = base.substring(0, lastDot);
-                }
-                if (j < base.length() && base.charAt(j) == '.') lastDot = j;
-            }
-        }
-        return base;
-    }
-
     @Override
     public List<JavaSemanticNode> getChildren() {
         return new ArrayList<>(modules);
