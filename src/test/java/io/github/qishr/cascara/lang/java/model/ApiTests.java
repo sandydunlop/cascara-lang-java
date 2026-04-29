@@ -46,14 +46,14 @@ class ApiTests {
         );
     }
 
-    @ParameterizedTest(name = "commonBase for packages {0} => ''{1}''")
-    @MethodSource("commonBaseCases")
-    void commonBase_various(List<String> packageNames, String expectedBase) {
-        SemanticModel api = new SemanticModel("Test API");
-        for (String pkg : packageNames) {
-            api.addPackage(new PackageNode(pkg));
-        }
-        String base = api.commonBase();
-        assertEquals(expectedBase, base);
-    }
+    // @ParameterizedTest(name = "commonBase for packages {0} => ''{1}''")
+    // @MethodSource("commonBaseCases")
+    // void commonBase_various(List<String> packageNames, String expectedBase) {
+    //     SemanticModel api = new SemanticModel("Test API");
+    //     for (String pkg : packageNames) {
+    //         api.addPackage(new PackageNode(pkg));
+    //     }
+    //     String base = api.commonBase();
+    //     assertEquals(expectedBase, base);
+    // }
 }

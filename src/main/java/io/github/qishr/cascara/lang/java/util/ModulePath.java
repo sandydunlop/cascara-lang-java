@@ -12,15 +12,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.jar.JarEntry;
 import java.util.stream.Stream;
 
-import io.github.qishr.cascara.common.io.JarFile;
+import io.github.qishr.cascara.common.content.JarFile;
 
 public class ModulePath {
     private static final String DOT_CLASS = ".class";

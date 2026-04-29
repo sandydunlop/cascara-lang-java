@@ -4,6 +4,7 @@ module cascara.lang.java {
     requires transitive java.compiler;
 
     requires cascara.common;
+    requires cascara.common.io;
 
     exports io.github.qishr.cascara.lang.java;
     exports io.github.qishr.cascara.lang.java.exception;
