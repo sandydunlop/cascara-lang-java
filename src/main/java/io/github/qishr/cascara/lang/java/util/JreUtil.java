@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import io.github.qishr.cascara.common.content.JarFile;
+import io.github.qishr.cascara.common.util.JarFile;
 import io.github.qishr.cascara.lang.java.exception.ClassLoadException;
 import io.github.qishr.cascara.lang.java.model.JlsName;
 import io.github.qishr.cascara.lang.java.model.MethodNode;
