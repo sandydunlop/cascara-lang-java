@@ -19,7 +19,7 @@ import io.github.qishr.cascara.lang.java.token.SemanticType;
  * This version processes the source as a single string and handles line/column tracking internally,
  * ensuring newlines are correctly tokenized as part of WHITESPACE.
  */
-public class JavaTokenizer implements Tokenizer<JavaToken> {
+public class JavaTokenizer extends AbstractJavaProcessor<Tokenizer<JavaToken>> implements Tokenizer<JavaToken> {
     JavaOptions options = new JavaOptions();
     Reporter reporter = null;
     private URI uri = null;
@@ -79,6 +79,8 @@ public class JavaTokenizer implements Tokenizer<JavaToken> {
         boolean isInsideBlockComment = false;
         boolean isInsideTextBlock = false;
     }
+
+    @Override protected JavaTokenizer self() { return this; }
 
     /**
      * Peeks at the character at the given offset from the current position.
