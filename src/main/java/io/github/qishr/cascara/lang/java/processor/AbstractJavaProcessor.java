@@ -23,7 +23,7 @@ public abstract class AbstractJavaProcessor<P extends Processor> implements Proc
     public Properties getCapabilities() {
         if (capabilities == null) {
             capabilities = new Properties();
-            capabilities.set("processor.contentType", "application/json");
+            capabilities.set("contentType", "application/json");
         }
         return capabilities;
     }
