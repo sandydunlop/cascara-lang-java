@@ -1,5 +1,6 @@
 package io.github.qishr.cascara.lang.java.processor;
 
+import io.github.qishr.cascara.common.diagnostic.NoOpReporter;
 import io.github.qishr.cascara.common.diagnostic.Reporter;
 import io.github.qishr.cascara.common.lang.LanguageOptions;
 import io.github.qishr.cascara.common.lang.processor.Processor;
@@ -9,13 +10,13 @@ import io.github.qishr.cascara.lang.java.JavaOptions;
 
 public abstract class AbstractJavaProcessor<P extends Processor> implements Processor {
     static final ContentType contentType = new ContentType("JSON")
-            .withMimeType("text/json")
-            .withMimeType("application/json")
-            .withMimeType("application/schema+json")
+            .withType("text/json")
+            .withType("application/json")
+            .withType("application/schema+json")
             .withSuffix(".json");
 
     protected JavaOptions options = new JavaOptions();
-    protected Reporter reporter;
+    protected Reporter reporter = new NoOpReporter();
     private Properties capabilities;
 
     protected abstract P self();
