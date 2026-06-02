@@ -88,7 +88,7 @@ public class UnicodeUnescaperTests {
         // Assert
         assertEquals(expected, unescaped, "The surrogate pair should unescape to the correct emoji.");
 
-        // Assert the resulting string's properties, which was part of your original check:
+        // Assert the resulting string's properties:
         // Length should be 12 chars ("Watermelon: ") + 2 char units (the surrogate pair) = 14
         assertEquals(14, unescaped.length(), "The string length should include the two char units of the surrogate pair.");
 
