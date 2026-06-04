@@ -57,7 +57,7 @@ public class JavaToken implements Token {
 
 
     @Override
-    public Object getValue() {
+    public String getContent() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getValue'");
     }

@@ -3,7 +3,7 @@ module cascara.lang.java {
     requires transitive jdk.javadoc;
     requires transitive java.compiler;
 
-    requires cascara.common;
+    requires transitive cascara.common;
     requires cascara.common.io;
 
     exports io.github.qishr.cascara.lang.java;
